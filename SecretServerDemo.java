@@ -2,7 +2,7 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
  
-public class SecretServer {
+public class SecretServerDemo {
  
 	public static void main(String[] args) {
  
@@ -22,7 +22,7 @@ public class SecretServer {
 
 			int consignment=0;
 			String strGreeting;
-			String message;
+			int result = 0; // number of bytes read
 	 
 			while(true){
 	 
@@ -41,18 +41,13 @@ public class SecretServer {
 
 				strGreeting = new String(rp.getData());
 				System.out.println("Client says = " + strGreeting);
-                                
-                                if(strGreeting.contains("REQUEST")){
-                                    consignment=0;
-                                }
 
-                                message = "RDT "+consignment+" "+secret[consignment];
 				// prepare data
-				if (consignment == secret.length-1) { // last consignment
-					message+=" END ";
+				if (consignment == secret.length) { // last consignment
+					sd = new String("END").getBytes();
+				} else {
+					sd = secret[consignment].getBytes();
 				}
-                                message+="\r\n";
-                                sd = message.getBytes();
 				sp=new DatagramPacket(sd,sd.length,ip,port);
 				 
 				// send data

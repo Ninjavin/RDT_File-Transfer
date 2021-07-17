@@ -2,7 +2,7 @@ import java.net.*;
 import java.io.*;
 import java.util.*;
  
-public class SecretClient {
+public class SecretClientDemo {
  
 	public static void main(String[] args) {
 	 
